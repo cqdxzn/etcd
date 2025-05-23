@@ -1,84 +1,78 @@
-# 这是 etcd 服务器的配置文件。
+# This is the configuration file for the etcd server.
 
-# 对当前Member 配置人类可读的名次
-name: 'default'
+# Human-readable name for this member.
+name: 'etcd-server-1'
 
-# 数据保存的目录
+# Path to the data directory.
 data-dir:
 
-# WAL保存的目录
+# Path to the dedicated wal directory.
 wal-dir:
 
-# 触发快照到磁盘的已提交事务的数量。
+# Number of committed transactions to trigger a snapshot to disk.
 snapshot-count: 10000
 
-# 心跳间隔的时间（以毫秒为单位）。
+# Time (in milliseconds) of a heartbeat interval.
 heartbeat-interval: 100
 
-# 选举超时的时间（以毫秒为单位）。
+# Time (in milliseconds) for an election to timeout.
 election-timeout: 1000
 
-# 当后端大小超过给定配额时发出警报。0 表示使用默认配额。
+# Raise alarms when backend size exceeds the given quota. 0 means use the
+# default quota.
 quota-backend-bytes: 0
 
-# 用于监听对等流量,值为逗号分隔的URL列表(默认对等Member使用2380端口)
+# List of comma separated URLs to listen on for peer traffic.
 listen-peer-urls: http://localhost:2380
 
-# 监听客户端流量的逗号分隔的URL列表(默认客户端使用 2379端口)
+# List of comma separated URLs to listen on for client traffic.
 listen-client-urls: http://localhost:2379
 
-# 保留的快照文件的最大数量（0 表示无限制）。
+# Maximum number of snapshot files to retain (0 is unlimited).
 max-snapshots: 5
 
-# 保留的最大 wal 文件数量（0 表示无限制）。
+# Maximum number of wal files to retain (0 is unlimited).
 max-wals: 5
 
-# 以逗号分隔的 CORS（跨域资源共享）来源白名单。
+# Comma-separated white list of origins for CORS (cross-origin resource sharing).
 cors:
 
-# 列出此成员的对等 URL，以向集群的其余部分通告。
 # List of this member's peer URLs to advertise to the rest of the cluster.
-# The URLs needed to be a comma-separated list. URL 需要以逗号分隔的列表。
+# The URLs needed to be a comma-separated list.
 initial-advertise-peer-urls: http://localhost:2380
 
-# 列出该成员的客户 URL 以向公众公布。
 # List of this member's client URLs to advertise to the public.
 # The URLs needed to be a comma-separated list.
 advertise-client-urls: http://localhost:2379
 
-# 用于引导集群的发现 URL。
 # Discovery URL used to bootstrap the cluster.
 discovery:
 
-# 有效值包括“exit”、“proxy”
+# Valid values include 'exit', 'proxy'
 discovery-fallback: 'proxy'
 
-# 用于发现服务流量的 HTTP 代理。
+# HTTP proxy to use for traffic to discovery service.
 discovery-proxy:
 
-# 用于引导初始集群的 DNS 域。
+# DNS domain used to bootstrap initial cluster.
 discovery-srv:
 
-# 用于引导的初始集群配置的逗号分隔字符串。
+# Comma separated string of initial cluster configuration for bootstrapping.
 # Example: initial-cluster: "infra0=http://10.0.1.10:2380,infra1=http://10.0.1.11:2380,infra2=http://10.0.1.12:2380"
 initial-cluster:
 
-# 引导期间 etcd 集群的初始集群令牌。
+# Initial cluster token for the etcd cluster during bootstrap.
 initial-cluster-token: 'etcd-cluster'
 
-# 初始集群状态（“new”或“existing”）。
 # Initial cluster state ('new' or 'existing').
 initial-cluster-state: 'new'
 
-# 拒绝会导致仲裁丢失的重新配置请求。
 # Reject reconfiguration requests that would cause quorum loss.
 strict-reconfig-check: false
 
-# 通过 HTTP 服务器启用运行时分析数据
 # Enable runtime profiling data via HTTP server
 enable-pprof: true
 
-# 有效值包括“on”、“readonly”、“off”
 # Valid values include 'on', 'readonly', 'off'
 proxy: 'off'
 
@@ -138,31 +132,26 @@ peer-transport-security:
 # The validity period of the self-signed certificate, the unit is year.
 self-signed-cert-validity: 1
 
-# 为 etcd 启用调试级别日志记录。
 # Enable debug-level logging for etcd.
 log-level: debug
 
 logger: zap
 
-# 指定“stdout”或“stderr”以跳过 journald 日志记录，即使在 systemd 下运行时也是如此。
 # Specify 'stdout' or 'stderr' to skip journald logging even when running under systemd.
 log-outputs: [stderr]
 
-# 强制创建一个新的单成员集群。
 # Force to create a new one member cluster.
 force-new-cluster: false
 
 auto-compaction-mode: periodic
 auto-compaction-retention: "1"
 
-# 将 etcd 限制为一组特定的 TLS 密码套件
 # Limit etcd to a specific set of tls cipher suites
 cipher-suites: [
   TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,
   TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
 ]
 
-# 将 etcd 限制为特定的 TLS 协议版本
 # Limit etcd to specific TLS protocol versions 
 tls-min-version: 'TLS1.2'
 tls-max-version: 'TLS1.3'

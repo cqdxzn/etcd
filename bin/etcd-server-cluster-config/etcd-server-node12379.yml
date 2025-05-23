@@ -1,7 +1,7 @@
 # 这是 etcd 服务器的配置文件。
 
 # 对当前Member 配置人类可读的名次
-name: 'default'
+name: 'etcd-server-node2379'
 
 # 数据保存的目录
 data-dir:
@@ -22,10 +22,10 @@ election-timeout: 1000
 quota-backend-bytes: 0
 
 # 用于监听对等流量,值为逗号分隔的URL列表(默认对等Member使用2380端口)
-listen-peer-urls: http://localhost:2380
+listen-peer-urls: http://localhost:12380
 
 # 监听客户端流量的逗号分隔的URL列表(默认客户端使用 2379端口)
-listen-client-urls: http://localhost:2379
+listen-client-urls: http://localhost:12379
 
 # 保留的快照文件的最大数量（0 表示无限制）。
 max-snapshots: 5
@@ -39,12 +39,12 @@ cors:
 # 列出此成员的对等 URL，以向集群的其余部分通告。
 # List of this member's peer URLs to advertise to the rest of the cluster.
 # The URLs needed to be a comma-separated list. URL 需要以逗号分隔的列表。
-initial-advertise-peer-urls: http://localhost:2380
+initial-advertise-peer-urls: http://localhost:2380,http://localhost:12380,http://localhost:22380
 
 # 列出该成员的客户 URL 以向公众公布。
 # List of this member's client URLs to advertise to the public.
 # The URLs needed to be a comma-separated list.
-advertise-client-urls: http://localhost:2379
+advertise-client-urls: http://localhost:2379,http://localhost:12379,http://localhost:22379
 
 # 用于引导集群的发现 URL。
 # Discovery URL used to bootstrap the cluster.

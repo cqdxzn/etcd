@@ -1,7 +1,7 @@
 # 这是 etcd 服务器的配置文件。
 
 # 对当前Member 配置人类可读的名次
-name: 'default'
+name: 'etcd-server-single-node'
 
 # 数据保存的目录
 data-dir:
